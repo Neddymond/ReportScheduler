@@ -20,7 +20,9 @@ const upload = multer({
 /** Endpoint for creating a Schedule */
 router.post("/schedule", async (req, res) => {
   try {
-    const schedule = new ReportSchedule({ ...req.body });
+    const schedule = new ReportSchedule({
+      ...req.body
+    });
 
     if (!schedule) {
       return res.status(400).send({

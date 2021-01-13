@@ -1,0 +1,24 @@
+<mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar>
+<mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar>
+
+<div class="form-container">
+  <form (submit)="createSchedule()">
+    <mat-form-field>
+      <input [(ngModel)]="date" name="date" matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="name" name="name" matInput placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="email" name="email" matInput placeholder="Email">
+    </mat-form-field>
+    <input type="file">
+    <button type="submit" mat-raised-button color="primary">Schedule</button>
+  </form>
+</div>
+
+<div link-container>
+  <a target="blank" href="http://localhost:4200/schedule-list">All Scheduled Reports</a>
+</div>
