@@ -6,7 +6,7 @@
   <table mat-table [dataSource]="schedules" class="mat-elevation-z8">
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef>Schedule Date</th>
-      <td mat-cell *matCellDef="let schedule">{{schedule.date | date: "dd/mm/yyyy"}}</td>
+      <td mat-cell *matCellDef="let schedule">{{schedule.date | date: "dd/MMM/yyyy, h:mm a"}}</td>
     </ng-container>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>

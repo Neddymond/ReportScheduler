@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { HomeComponent } from './home/home.component';
 import { SchedulesComponent } from './schedules/schedules.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { ScheduleListComponent } from './schedule-list/schedule-list.component';
     AppComponent,
     HomeComponent,
     SchedulesComponent,
-    ScheduleListComponent
+    ScheduleListComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

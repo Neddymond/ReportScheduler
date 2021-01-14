@@ -23,7 +23,7 @@ const reportScheduleSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  report: {
+  document: {
     type: Buffer,
     // required: true
   }

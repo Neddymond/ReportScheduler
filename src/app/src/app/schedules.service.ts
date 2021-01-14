@@ -16,17 +16,29 @@ export class SchedulesService {
     return this.http.get<Schedule[]>(`${this.BASE_URL}/schedule`);
   };
 
-  createSchedule(date: string, name: string, email: string, document: string): 
+  createSchedule(date: string, name: string, email: string, document: File):
   Observable<Schedule> {
+    const formData = new FormData();
+    formData.append("document", document, document.name);
+    console.log(formData.get("document"));
+    let bufferDocument = Buffer.from(document.name);
+    
     return this.http.post<Schedule>(`${this.BASE_URL}/schedule`, {
       date,
       name,
       email,
-      document
+      document: bufferDocument
     });
   };
 
   cancelSchedule(id: string): Observable<any> {
     return this.http.delete(`${this.BASE_URL}/schedule/${id}`);
+  };
+
+  upload(document: File): Observable<any> {
+    const formData = new FormData()
+    formData.append("document", document, document.name);
+    // console.log(formData.get("document"));
+    return this.http.post(`${this.BASE_URL}/schedule/uploadreport`, formData);
   };
 }

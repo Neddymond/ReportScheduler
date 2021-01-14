@@ -1,7 +1,9 @@
 const ReportSchedule = require("../Models/reportSchedule");
+const Report = require("../Models/report");
 const express = require("express");
 const router = new express.Router();
 const multer = require("multer");
+const { sendScheduledReport } = require("../email/email");
 
 /** Multer is a middleware for handling file uploads */
 const upload = multer({
@@ -19,6 +21,9 @@ const upload = multer({
 
 /** Endpoint for creating a Schedule */
 router.post("/schedule", upload.single("document"), async (req, res) => {
+  const body = { ...req.body };
+  // const file = req.file.buffer;
+  // console.log(body);
   try {
     const schedule = new ReportSchedule({
       ...req.body
@@ -32,28 +37,31 @@ router.post("/schedule", upload.single("document"), async (req, res) => {
 
     await schedule.save();
 
+    sendScheduledReport(schedule.email, schedule.name, schedule.date, schedule.document);
+
     res.send();
   } catch (e) {
     res.status(500).send(e);
   }
 });
 
-// /** Endpoint for uploading a report */
-// router.post("/schedule/uploadreport", upload.single("report"), async (req, res) => {
-//   try {
-//     const report = new ReportSchedule({
-//       report: req.file.buffer
-//     });
+/** Endpoint for uploading a report */
+router.post("/schedule/uploadreport", upload.single("document"), async (req, res) => {
+  try {
+    const doc = req.file.buffer;
+    // console.log(doc);
+    const report = new Report(req.file.buffer);
+    console.log(report);
 
-//     await report.save();
+    await report.save();
 
-//     res.send();
-//   } catch (e) {
-//     res.status(500).send(e);
-//   }
-// }, (error, req, res, next) => {
-//   res.status(400).send({ error: error.message});
-// });
+    res.send();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+}, (error, req, res, next) => {
+  res.status(400).send({ error: error.message});
+});
 
 /** Endpoint for fetching all the scheduled report */
 router.get("/schedule", async (req, res) => {
@@ -68,7 +76,7 @@ router.get("/schedule", async (req, res) => {
   }
 });
 
-/** Endpoint for deleting a scheduled report */
+/** Endpoint for cancelling a scheduled report */
 router.delete("/schedule/:id", async (req, res) => {
   try {
     const report = await ReportSchedule.findById(req.params.id);
