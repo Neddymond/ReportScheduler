@@ -14,7 +14,10 @@
     <mat-form-field>
       <input [(ngModel)]="email" name="email" matInput placeholder="Email">
     </mat-form-field>
-    <input type="file">
+    <label for="singleFile">Upload file</label>
+    <input id="singleFile" type="file" [(ngModel)]="document" name="document" [fileUploadInputFor]="fileUploadQueue">
+    <br>
+    <mat-file-upload-queue></mat-file-upload-queue>
     <button type="submit" mat-raised-button color="primary">Schedule</button>
   </form>
 </div>

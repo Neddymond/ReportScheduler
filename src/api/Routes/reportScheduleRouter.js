@@ -18,7 +18,7 @@ const upload = multer({
 });
 
 /** Endpoint for creating a Schedule */
-router.post("/schedule", async (req, res) => {
+router.post("/schedule", upload.single("document"), async (req, res) => {
   try {
     const schedule = new ReportSchedule({
       ...req.body
@@ -38,22 +38,22 @@ router.post("/schedule", async (req, res) => {
   }
 });
 
-/** Endpoint for uploading a report */
-router.post("/schedule/uploadreport", upload.single("report"), async (req, res) => {
-  try {
-    const report = new ReportSchedule({
-      report: req.file.buffer
-    });
+// /** Endpoint for uploading a report */
+// router.post("/schedule/uploadreport", upload.single("report"), async (req, res) => {
+//   try {
+//     const report = new ReportSchedule({
+//       report: req.file.buffer
+//     });
 
-    await report.save();
+//     await report.save();
 
-    res.send();
-  } catch (e) {
-    res.status(500).send(e);
-  }
-}, (error, req, res, next) => {
-  res.status(400).send({ error: error.message});
-});
+//     res.send();
+//   } catch (e) {
+//     res.status(500).send(e);
+//   }
+// }, (error, req, res, next) => {
+//   res.status(400).send({ error: error.message});
+// });
 
 /** Endpoint for fetching all the scheduled report */
 router.get("/schedule", async (req, res) => {
