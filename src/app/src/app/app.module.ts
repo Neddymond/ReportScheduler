@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatFileUploadModule } from "angular-material-fileupload";
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -37,7 +36,6 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     MatTableModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatFileUploadModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
