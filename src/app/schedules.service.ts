@@ -18,16 +18,14 @@ export class SchedulesService {
 
   createSchedule(date: string, name: string, email: string, document: File):
   Observable<Schedule> {
-    const formData = new FormData();
-    formData.append("document", document, document.name);
-    console.log(formData.get("document"));
-    let bufferDocument = Buffer.from(document.name);
+    // const formData = new FormData();
+    // formData.append("document", document, document.name);
     
     return this.http.post<Schedule>(`${this.BASE_URL}/schedule`, {
       date,
       name,
       email,
-      document: bufferDocument
+      document
     });
   };
 

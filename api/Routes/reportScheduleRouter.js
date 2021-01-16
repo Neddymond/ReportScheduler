@@ -26,7 +26,8 @@ router.post("/schedule", upload.single("document"), async (req, res) => {
   // console.log(body);
   try {
     const schedule = new ReportSchedule({
-      ...req.body
+      ...req.body,
+      // date: new Date.now()
     });
 
     if (!schedule) {
@@ -37,7 +38,7 @@ router.post("/schedule", upload.single("document"), async (req, res) => {
 
     await schedule.save();
 
-    sendScheduledReport(schedule.email, schedule.name, schedule.date, schedule.document);
+    // sendScheduledReport(schedule.email, schedule.name, schedule.date, schedule.document);
 
     res.send();
   } catch (e) {
