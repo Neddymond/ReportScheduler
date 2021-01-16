@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 const reportScheduleRouter = require("./Routes/reportScheduleRouter");
 
 // built in middleware to serve static content just as images, css, html etc
-app.use(express.static(path.join(__dirname, '../src')));
+app.use(express.static(path.join(__dirname, '../src/app')));
  
 // all get requests will point to angular's index.html in dist folder
 app.get('/*', async (req, res) => {
