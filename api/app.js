@@ -4,9 +4,6 @@ require("./db/mongoose");
 const path = require("path");
 const port = process.env.PORT || 3000;
 
-// const staticPath = path.join(__dirname, "../src/index.html");
-// console.log(staticPath);
-
 // Routers
 const reportScheduleRouter = require("./Routes/reportScheduleRouter");
 

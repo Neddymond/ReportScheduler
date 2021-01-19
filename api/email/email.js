@@ -10,17 +10,25 @@ const data = {
   text: "Man, I'm testing mailgun's API"
 };
 
-const sendScheduledReport = (email, name, date, document) => {
-  mg.messages().send({
-    from: "Chinedu <Neddymond10@gmail.com>",
-    to: email,
-    subject: "Report Schedule",
-    text: ```Hello ${ name },
-    
-    This is to remind you that ${document} is scheduled for
-    
-    date: ${date}.```
-  });
+const sendScheduledReport = (scheduleMode, date, email, name, document) => {
+  if (scheduleMode === oneoff) {
+    mg.messages().send({
+      from: "Chinedu <Neddymond10@gmail.com>",
+      to: email,
+      subject: "Report Schedule",
+      text: `Hello ${name}, view this document:`,
+      attachment: `${document}`
+    });
+  } else if (scheduleMode === recurring) {
+    mg.messages().send({
+      from: "Chinedu <Neddymond10@gmail.com>",
+      to: email,
+      subject: "Report Schedule",
+      text: `Hello ${name}, view this document:`,
+      attachment: `${document}`,
+      "o:deliverytime": `${date}`
+    });
+  }
 };
 
 module.exports = {
